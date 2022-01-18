@@ -5,7 +5,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 
 function App() {
-  const LOGO = <Link to="/" className="logo"><i className="fab fa-twitter"></i><p>CLONE</p></Link>;
+  const LOGO = <Link to="/" className="logo"><i className="fab fa-twitter"></i><p>clone</p></Link>;
   return (
     <Routes className="App">
       <Route path="/" element={<Home />} />

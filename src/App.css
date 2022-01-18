@@ -67,6 +67,9 @@ button:hover {
   align-items: center;
   align-self: center;
   color: var(--color-blue);
+  font-family: 'Sigmar One', cursive;
+  font-weight: bold;
+  letter-spacing: .25em;
 }
 
 .logo i {
