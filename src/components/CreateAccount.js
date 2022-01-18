@@ -14,6 +14,11 @@ function CreateAccount(props) {
         required
       />
       <input 
+        type="text" 
+        placeholder="@" 
+        required
+      />
+      <input 
         type="email" 
         placeholder="Email" 
         required
