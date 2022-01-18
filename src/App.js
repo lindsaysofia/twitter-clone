@@ -1,11 +1,11 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import './App.css';
 import CreateAccount from "./components/CreateAccount";
 import Login from './components/Login';
 import Home from './components/Home';
 
 function App() {
-  const LOGO = <div className="logo"><i className="fab fa-twitter"></i><i className="far fa-clone"></i></div>;
+  const LOGO = <Link to="/" className="logo"><i className="fab fa-twitter"></i><p>CLONE</p></Link>;
   return (
     <Routes className="App">
       <Route path="/" element={<Home />} />
