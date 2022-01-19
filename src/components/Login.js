@@ -12,11 +12,13 @@ function Login(props) {
         type="email" 
         placeholder="Email" 
         required
+        name="email"
       />
       <input 
         type="password" 
         placeholder="Password" 
         required
+        name="password"
       />
       <button 
         type="submit"
