@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 
 function Login(props) {
   const {
-    LOGO
+    LOGO,
+    login
   } = props;
   return (
-    <form className="login">
+    <form className="login" onSubmit={login}>
       {LOGO}
       <h2>Sign in to Twitter Clone</h2>
       <input 
