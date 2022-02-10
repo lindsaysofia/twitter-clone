@@ -4,13 +4,14 @@ import '../styles/Home.css';
 function Home(props) {
   const {
     isLoggedIn,
-    uid,
-    LOGO
+    user,
+    LOGO,
+    getImage
   } = props;
   if (isLoggedIn) {
     return (
       <div className="Home">
-        <HomeNav uid={uid} LOGO={LOGO}/>
+        <HomeNav user={user} LOGO={LOGO} getImage={getImage}/>
       </div>
     );
   }
