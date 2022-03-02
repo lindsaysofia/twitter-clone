@@ -1,22 +1,14 @@
-import HomeNav from './HomeNav';
 import '../styles/Home.css';
+import HomeLeft from './HomeLeft';
 
-function Home(props) {
-  const {
-    isLoggedIn,
-    user,
-    LOGO,
-    getImage
-  } = props;
-  if (isLoggedIn) {
-    return (
-      <div className="Home">
-        <HomeNav user={user} LOGO={LOGO} getImage={getImage}/>
-      </div>
-    );
-  }
+function Home() {
+  
   return (
-    <h1>I'm Logged Out!</h1>
+    <div className="home">
+      <HomeLeft />
+      <div>HomeMain</div>
+      <div>HomeRight</div>
+    </div>
   );
 }
 

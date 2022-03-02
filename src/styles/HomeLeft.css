@@ -1,0 +1,51 @@
+.homeLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1.175em;
+  box-sizing: border-box;
+  gap: 1em;
+}
+
+.homeLeft > * {
+  cursor: pointer;
+  padding: .5em 1em;
+}
+
+.homeLeft__logo {
+  color: var(--color-blue);
+}
+
+.homeLeft__logo:hover {
+  color: var(--color-blue-hover);
+}
+
+.homeLeft__option {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.homeLeft__option > * {
+  margin: 0px;
+}
+
+.homeLeft__option:hover {
+  background-color: var(--color-tan);
+  border-radius: 35px;
+}
+
+.homeLeft__button {
+  align-self: stretch;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  height: 50px;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.05em;
+}
+
+.homeLeft__button:hover {
+  background-color: var(--color-blue-hover);
+}
