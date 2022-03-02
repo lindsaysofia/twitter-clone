@@ -1,12 +1,13 @@
 import '../styles/Home.css';
 import HomeLeft from './HomeLeft';
+import HomeMain from './HomeMain';
 
 function Home() {
   
   return (
     <div className="home">
       <HomeLeft />
-      <div>HomeMain</div>
+      <HomeMain />
       <div>HomeRight</div>
     </div>
   );
