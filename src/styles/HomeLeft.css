@@ -44,6 +44,7 @@
   border: none;
   border-radius: 50px;
   font-size: 1.05em;
+  font-weight: bold;
 }
 
 .homeLeft__button:hover {

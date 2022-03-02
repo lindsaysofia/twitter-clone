@@ -59,8 +59,8 @@ function CreateTweet() {
           </Tooltip>
         </div>
         <div className="createTweet__submit">
-          <h4>0/280</h4>
-        <button type="submit">Tweet</button>
+          <p>0/280</p>
+          <button type="submit">Tweet</button>
         </div>
       </div>
     </form>
