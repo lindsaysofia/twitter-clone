@@ -14,6 +14,7 @@
 
 .homeLeft__logo {
   color: var(--color-blue);
+  margin: 0em .75em;
 }
 
 .homeLeft__logo:hover {
@@ -28,6 +29,10 @@
 
 .homeLeft__option > * {
   margin: 0px;
+}
+
+.homeLeft__option > h4 {
+  font-weight: normal;
 }
 
 .homeLeft__option:hover {

@@ -33,14 +33,26 @@
   align-items: center;
 }
 
-.createTweet__submit {
+.createTweet__asides {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1em;
+  flex-wrap: wrap;
 }
 
-.createTweet__submit button {
+.createTweet__engagement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.createTweet__submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.createTweet__submit > button {
   background-color: var(--color-blue);
   color: var(--color-white);
   outline: none;
@@ -50,4 +62,8 @@
   font-weight: bold;
   padding: .45em 1em;
   cursor: pointer;
+}
+
+.createTweet__submit > button:hover {
+  background-color: var(--color-blue-hover);
 }

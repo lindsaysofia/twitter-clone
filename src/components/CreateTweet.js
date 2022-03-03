@@ -7,7 +7,6 @@ import PollIcon from '@mui/icons-material/Poll';
 import SentimentSatisfiedAltOutlinedIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 function CreateTweet() {
@@ -23,40 +22,58 @@ function CreateTweet() {
       </div>
       <div className="createTweet__bottom">
         <div className="createTweet__asides">
-          <Tooltip title="Media">
+          <div 
+            className="createTweet__engagement"
+            title="Media"
+          >
             <IconButton>
               <BrokenImageOutlinedIcon />
             </IconButton>
-          </Tooltip>
-          <input 
+            <input 
             type=""
             placeholder="image URL (Optional)"
           />
-          <Tooltip title="GIF">
+          </div>
+          <div 
+            className="createTweet__engagement"
+            title="GIF"
+          >
             <IconButton>
               <GifBoxIcon />
             </IconButton>
-          </Tooltip>
-          <Tooltip title="Poll">
+          </div>
+          <div 
+            className="createTweet__engagement"
+            title="Poll"
+          >
             <IconButton>
               <PollIcon />
             </IconButton>
-          </Tooltip>
-          <Tooltip title="Emoji">
+          </div>
+          <div 
+            className="createTweet__engagement"
+            title="Emoji"
+          >
             <IconButton>
               <SentimentSatisfiedAltOutlinedIcon />
             </IconButton>
-          </Tooltip>
-          <Tooltip title="Schedule">
+          </div>
+          <div 
+            className="createTweet__engagement"
+            title="Schedule"
+          >
             <IconButton>
               <DateRangeOutlinedIcon />
             </IconButton>
-          </Tooltip>
-          <Tooltip title="Location">
+          </div>
+          <div 
+            className="createTweet__engagement"
+            title="Location"
+          >
             <IconButton>
               <LocationOnOutlinedIcon />
             </IconButton>
-          </Tooltip>
+          </div>
         </div>
         <div className="createTweet__submit">
           <p>0/280</p>
