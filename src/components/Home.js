@@ -1,6 +1,7 @@
 import '../styles/Home.css';
 import HomeLeft from './HomeLeft';
 import HomeMain from './HomeMain';
+import HomeRight from './HomeRight';
 
 function Home() {
   
@@ -8,7 +9,7 @@ function Home() {
     <div className="home">
       <HomeLeft />
       <HomeMain />
-      <div>HomeRight</div>
+      <HomeRight />
     </div>
   );
 }

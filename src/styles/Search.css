@@ -1,0 +1,17 @@
+.search {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-tan);
+  padding: 1em;
+  border-radius: 25px;
+}
+
+.search > .MuiSvgIcon-root {
+  color: gray;
+}
+
+.search > input {
+  border: none;
+  outline: none;
+  background-color: var(--color-tan);
+}
