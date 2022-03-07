@@ -14,4 +14,5 @@
   border: none;
   outline: none;
   background-color: var(--color-tan);
+  width: 100%;
 }

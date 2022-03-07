@@ -6,8 +6,8 @@
 }
 
 .createTweet__top {
-  display: grid;
-  grid-template-columns: 10% 90%;
+  display: flex;
+  gap: 1em;
   border-bottom: 1px solid var(--color-tan);
 }
 

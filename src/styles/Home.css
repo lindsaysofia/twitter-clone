@@ -3,4 +3,18 @@
   grid-template-columns: 25% 50% 25%;
   margin: 0 100px;
   gap: 1em;
+  min-height: 100vh;
+}
+
+@media only screen and (max-width: 900px) {
+  .home {
+    margin: 0 50px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .home {
+    display: flex;
+    margin: 0;
+  }
 }

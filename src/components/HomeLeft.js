@@ -9,11 +9,12 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
+import Avatar from '@mui/material/Avatar';
 
-function HomeLeft() {
+function HomeLeft({ user }) {
   return (
     <div className="homeLeft">
-      <TwitterIcon className="homeLeft__logo"/>
+      {user ? <Avatar className="homeLeft__logo" src=""/> : <TwitterIcon className="homeLeft__logo"/>}
       <div className="homeLeft__option">
         <HomeIcon />
         <h4>Home</h4>

@@ -5,6 +5,7 @@
   font-size: 1.175em;
   box-sizing: border-box;
   gap: 1em;
+  padding-top: 1em;
 }
 
 .homeLeft > * {
@@ -54,4 +55,19 @@
 
 .homeLeft__button:hover {
   background-color: var(--color-blue-hover);
+}
+
+@media only screen and (max-width: 800px) {
+  .homeLeft {
+    padding: 0;
+  }
+
+  .homeLeft__logo {
+    padding: 1em;
+  }
+
+  .homeLeft__option,
+  .homeLeft__button {
+    display: none;
+  }
 }
