@@ -1,0 +1,23 @@
+.happening {
+  background-color: var(--color-tan);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  border-radius: 15px;
+}
+
+.happening > h3 {
+  margin: 0;
+}
+
+.happening__article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.happening__hashtag {
+  color: var(--color-blue);
+  cursor: pointer;
+}

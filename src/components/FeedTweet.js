@@ -56,7 +56,7 @@ function FeedTweet({ created_at, in_like_to_tweetid, in_reply_to_tweetid, in_ret
             {'Lorem ipsum dolor sit amet, liber posidonium suscipiantur vim cu, eu duo vitae dictas. Consulatu evertitur argumentum duo an. Id percipitur persequeris quo. No modo oratio pro. An mundi nostrum splendide has. Modus ocurreret at mea.'}
           </div>
           <div className="feedTweet__media">
-            <img src={"https://images.unsplash.com/photo-1505673542670-a5e3ff5b14a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmlnaHQlMjBza3l8ZW58MHx8MHx8&w=1000&q=80"} alt="" />
+            <img src={""} alt="" />
           </div>
         </div>
       </div>
