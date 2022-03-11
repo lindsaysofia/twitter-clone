@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/FeedTweet.css'
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
@@ -9,28 +9,50 @@ import Avatar from '@mui/material/Avatar';
 import {  Link } from "react-router-dom";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import IconButton from '@mui/material/IconButton';
+import dateFormat, { masks } from "dateformat";
+import { doc, getDoc } from "firebase/firestore";
+import db from '../firebase';
 
-function FeedTweet({ created_at, in_like_to_tweetid, in_reply_to_tweetid, in_retweet_to_tweetid, like_count, reply_count, retweet_count, text, at, uid }) {
+
+function FeedTweet(props) {
+  const { created_at, in_like_to_tweetid, in_reply_to_tweetid, in_retweet_to_tweetid, like_count, reply_count, retweet_count, text, url, uid } = props.tweet;
+
+  const [user, setUser] = useState({name: '', at: ''})
+
+  const docRef = doc(db, 'users', uid);
+  getDoc(docRef)
+    .then((docSnap) => {
+      const { name, at } = docSnap.data();
+      setUser({
+        name,
+        at,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  const { name, at } = user;
 
   let top = '';
   if (in_like_to_tweetid) {
     top = (
       <div className="feedTweet__top">
         <FavoriteBorderIcon />
-        <p><Link to="/">ProfileName</Link> liked</p>
+        <p><Link to="/">{name}</Link> liked</p>
       </div>
     );
   } else if (in_reply_to_tweetid) {
     top = (
       <div className="feedTweet__top">
-        <p><Link to="/">ProfileName</Link> replied to</p>
+        <p><Link to="/">{name}</Link> replied to</p>
       </div>
     );
   } else if (in_retweet_to_tweetid) {
     top = (
       <div className="feedTweet__top">
         <CompareArrowsIcon />
-        <p><Link to="/">ProfileName</Link> retweeted</p>
+        <p><Link to="/">{name}</Link> retweeted</p>
       </div>
     );
   }
@@ -43,20 +65,20 @@ function FeedTweet({ created_at, in_like_to_tweetid, in_reply_to_tweetid, in_ret
         <div className="feedTweet_info">
           <div className="feedTweet__header">
             <div className="feedTweet__user">
-              <Link to="/">ProfileName</Link>
-              <p>@username</p>
+              <Link to="/">{name}</Link>
+              <p>{at}</p>
               <FiberManualRecordIcon />
-              <p>Date</p>
+              <p>{dateFormat(new Date(created_at?.toDate()), 'd mmm yy')}</p>
             </div>
             <div className="feedTweet__more">
               <MoreVertOutlinedIcon />
             </div>
           </div>
           <div className="feedTweet__text">
-            {'Lorem ipsum dolor sit amet, liber posidonium suscipiantur vim cu, eu duo vitae dictas. Consulatu evertitur argumentum duo an. Id percipitur persequeris quo. No modo oratio pro. An mundi nostrum splendide has. Modus ocurreret at mea.'}
+            {text}
           </div>
           <div className="feedTweet__media">
-            <img src={""} alt="" />
+            <img src={url} alt="" />
           </div>
         </div>
       </div>
@@ -69,7 +91,7 @@ function FeedTweet({ created_at, in_like_to_tweetid, in_reply_to_tweetid, in_ret
           <IconButton>
             <ChatBubbleOutlineOutlinedIcon style={{color: 'var(--color-blue)'}} />
           </IconButton>
-          <p>{0}</p>
+          <p>{reply_count}</p>
         </div>
         <div 
           className="feedTweet__engagement"
@@ -79,7 +101,7 @@ function FeedTweet({ created_at, in_like_to_tweetid, in_reply_to_tweetid, in_ret
           <IconButton>
             <CompareArrowsIcon style={{color: '#4cbb17'}}/>
           </IconButton>
-          <p>{0}</p>
+          <p>{retweet_count}</p>
         </div>
         <div 
           className="feedTweet__engagement"
@@ -89,7 +111,7 @@ function FeedTweet({ created_at, in_like_to_tweetid, in_reply_to_tweetid, in_ret
           <IconButton>
             <FavoriteBorderIcon style={{color: '#ff4500'}} />
           </IconButton>
-          <p>{0}</p>
+          <p>{like_count}</p>
         </div>
         <div 
           className="feedTweet__engagement"
