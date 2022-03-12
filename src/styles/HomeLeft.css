@@ -66,8 +66,13 @@
     padding: 1em;
   }
 
-  .homeLeft__option,
-  .homeLeft__button {
+  .homeLeft__option {
     display: none;
+  }
+
+  .homeLeft__button {
+    height: 30px;
+    border-radius: 25px;
+    font-size: .75em;
   }
 }

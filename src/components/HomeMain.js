@@ -3,11 +3,13 @@ import '../styles/HomeMain.css'
 import React from 'react';
 import CreateTweet from './CreateTweet';
 import Feed from './Feed';
+import { useStateValue } from './StateProvider';
 
 function HomeMain() {
+  const [{ user }, dispatch] = useStateValue();
   return (
     <div className="homeMain">
-      <CreateTweet />
+      {user ? <CreateTweet /> : ''}
       <Feed />
     </div>
   )

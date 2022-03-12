@@ -10,11 +10,33 @@ import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBullet
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import Avatar from '@mui/material/Avatar';
+import { useStateValue } from './StateProvider';
+// import { useNavigate } from "react-router-dom";
 
-function HomeLeft({ user }) {
+function HomeLeft() {
+  const [{ user }] = useStateValue();
+  // let navigate = useNavigate();
+  
+  const login = () => {
+    console.log('login');
+    // navigate('/login');
+  };
+
+  const tweet = () => {
+    console.log('tweet');
+  };
+
+  const handleClick = () => {
+    if (user) {
+      tweet();
+    } else {
+      login();
+    }
+  };
+
   return (
     <div className="homeLeft">
-      {user ? <Avatar className="homeLeft__logo" src=""/> : <TwitterIcon className="homeLeft__logo"/>}
+      {user ? <Avatar className="homeLeft__logo" src={user.photoURL} /> : <TwitterIcon className="homeLeft__logo"/>}
       <div className="homeLeft__option">
         <HomeIcon />
         <h4>Home</h4>
@@ -47,7 +69,10 @@ function HomeLeft({ user }) {
         <MoreHorizOutlinedIcon />
         <h4>More</h4>
       </div>
-      <button className="homeLeft__button">Tweet</button>
+      <button 
+      className="homeLeft__button"
+      onClick={handleClick}
+      >{user ? 'Tweet' : 'Login'}</button>
     </div>
   )
 }
