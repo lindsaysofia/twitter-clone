@@ -1,0 +1,31 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login > button {
+  width: 300px;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  font-weight: bold;
+}
+
+.login > button:hover {
+  background-color: var(--color-blue-hover);
+}
+
+.login__logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  color: var(--color-blue)
+}
+
+.login__logo > .MuiSvgIcon-root {
+  font-size: 1.5em;
+}
