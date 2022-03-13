@@ -11,27 +11,14 @@ import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import Avatar from '@mui/material/Avatar';
 import { useStateValue } from './StateProvider';
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function HomeLeft() {
   const [{ user }] = useStateValue();
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   
   const login = () => {
-    console.log('login');
-    // navigate('/login');
-  };
-
-  const tweet = () => {
-    console.log('tweet');
-  };
-
-  const handleClick = () => {
-    if (user) {
-      tweet();
-    } else {
-      login();
-    }
+    navigate('/login');
   };
 
   return (
@@ -69,10 +56,10 @@ function HomeLeft() {
         <MoreHorizOutlinedIcon />
         <h4>More</h4>
       </div>
-      <button 
+      {!user ? <button 
       className="homeLeft__button"
-      onClick={handleClick}
-      >{user ? 'Tweet' : 'Login'}</button>
+      onClick={login}
+      >Login</button> : ''}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/CreateTweet.css';
 import Avatar from '@mui/material/Avatar';
 import BrokenImageOutlinedIcon from '@mui/icons-material/BrokenImageOutlined';
@@ -8,16 +8,46 @@ import SentimentSatisfiedAltOutlinedIcon from '@mui/icons-material/SentimentSati
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import IconButton from '@mui/material/IconButton';
+import { useStateValue } from './StateProvider';
+import db from '../firebase';
+import { collection, addDoc, Timestamp, doc,setDoc } from "firebase/firestore";
 
 function CreateTweet() {
+  const [{ user }] = useStateValue();
+  const [text, setText] = useState('');
+  const [url, setUrl] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newTweetRef = doc(collection(db, 'tweets'));
+    setDoc(newTweetRef, {
+      created_at: Timestamp.now(),
+      in_like_to_tweetid: '',
+      in_reply_to_tweetid: '',
+      in_retweet_to_tweetid: '',
+      like_count: 0,
+      reply_count: 0,
+      retweet_count: 0,
+      text,
+      url,
+      uid: user.uid,
+      tweetid: newTweetRef.id,
+    })
+    .catch((err) => console.log(err));
+    setText('');
+    setUrl('');
+  };
+
   return (
-    <form className="createTweet">
+    <form className="createTweet" onSubmit={handleSubmit}>
       <div className="createTweet__top">
-        <Avatar src=""/>
+        <Avatar src={user.photoURL}/>
         <textarea
           placeholder="What's happening?"
           minLength="1"
           maxLength="280"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         ></textarea>
       </div>
       <div className="createTweet__bottom">
@@ -32,6 +62,8 @@ function CreateTweet() {
             <input 
             type=""
             placeholder="image URL (Optional)"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
           />
           </div>
           <div 

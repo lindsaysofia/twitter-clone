@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/FeedTweet.css'
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
@@ -19,18 +19,24 @@ function FeedTweet(props) {
 
   const [user, setUser] = useState({name: '', at: ''})
 
-  const docRef = doc(db, 'users', uid);
-  getDoc(docRef)
-    .then((docSnap) => {
-      const { name, at } = docSnap.data();
-      setUser({
-        name,
-        at,
+  useEffect(() => {
+    const docRef = doc(db, 'users', uid);
+    getDoc(docRef)
+      .then((docSnap) => {
+        const { name, at } = docSnap.data();
+        setUser({
+          name,
+          at,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      return () => {
+        setUser({name: '', at: ''});
+      }
+  }, []);
+
 
   const { name, at } = user;
 

@@ -6,9 +6,11 @@ import { signInWithPopup } from "firebase/auth";
 import { actionTypes } from './reducer';
 import { useStateValue } from './StateProvider';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [state, dispatch] = useStateValue();
+  let navigate = useNavigate();
 
   const signIn = () => {
     //sign in
@@ -18,9 +20,9 @@ function Login() {
         type: actionTypes.SET_USER,
         user: result.user,
        });
-      console.log(result.user);
+       navigate('/');
     })
-    .catch((error) => alert(error.message));
+    .catch((err) => alert(err.message));
   };
   return (
     <div className="login">
