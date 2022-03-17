@@ -32,6 +32,7 @@ function CreateTweet() {
       url,
       uid: user.uid,
       tweetid: newTweetRef.id,
+      photoURL: user.photoURL,
     })
     .catch((err) => console.log(err));
     setText('');

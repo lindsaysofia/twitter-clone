@@ -12,12 +12,13 @@ import IconButton from '@mui/material/IconButton';
 import dateFormat, { masks } from "dateformat";
 import { doc, getDoc } from "firebase/firestore";
 import db from '../firebase';
+import { auth } from '../firebase';
 
 
 function FeedTweet(props) {
-  const { created_at, in_like_to_tweetid, in_reply_to_tweetid, in_retweet_to_tweetid, like_count, reply_count, retweet_count, text, url, uid } = props.tweet;
+  const { created_at, in_like_to_tweetid, in_reply_to_tweetid, in_retweet_to_tweetid, like_count, reply_count, retweet_count, text, url, uid, photoURL } = props.tweet;
 
-  const [user, setUser] = useState({name: '', at: ''})
+  const [user, setUser] = useState({name: '', at: ''});
 
   useEffect(() => {
     const docRef = doc(db, 'users', uid);
@@ -67,7 +68,7 @@ function FeedTweet(props) {
     <div className="feedTweet">
       {top}
       <div className="feedTweet__middle">
-        <Avatar src="" />
+        <Link to={`/${uid}`}><Avatar src={photoURL} /></Link>
         <div className="feedTweet_info">
           <div className="feedTweet__header">
             <div className="feedTweet__user">
