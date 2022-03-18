@@ -7,15 +7,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import Avatar from '@mui/material/Avatar';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import dateFormat, { masks } from "dateformat";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, Timestamp } from "firebase/firestore";
 import db from '../firebase';
 
 function Profile() {
   let { uid } = useParams();
 
-  const [user, setUser] = useState({
+  const [profile, setProfile] = useState({
     at: '',
-    created_at: '',
+    created_at: Timestamp.now(),
     description: '',
     feed: [],
     followers: [],
@@ -40,7 +40,7 @@ function Profile() {
           profile_banner_url,
           photoURL,
         } = docSnap.data();
-        setUser({
+        setProfile({
           at,
           created_at,
           description,
@@ -56,9 +56,9 @@ function Profile() {
         console.log(err);
       });
       return () => {
-        setUser({
+        setProfile({
           at: '',
-          created_at: '',
+          created_at: Timestamp.now(),
           description: '',
           feed: [],
           followers: [],
@@ -80,7 +80,7 @@ function Profile() {
     name,
     profile_banner_url,
     photoURL
-  } = user;
+  } = profile;
   return (
     <div className="profile">
       <div className="profile__header" style={{backgroundImage: `url(${profile_banner_url})`}}>
@@ -94,19 +94,26 @@ function Profile() {
       <div className="profile__user">
         <div className="profile__info">
           <div className="profile__infoTop">
-            <Avatar src={photoURL} />
+            <Avatar className="profile__avatar" src={photoURL} />
             <button>Follow</button>
           </div>
-          <h4>{name}</h4>
-          <h5>@{at}</h5>
-          <p>{description}</p>
-          {/* <p><CalendarMonthIcon /> Joined {dateFormat(new Date(created_at?.toDate()), 'd mmm yy')}</p> */}
+          <h4 className="profile__name">{name}</h4>
+          <h5 className="profile__at">@{at}</h5>
+          <p className="profile__description">{description}</p>
+          <p className="profile__created_at"><CalendarMonthIcon /> Joined {dateFormat(new Date(created_at?.toDate()), 'mmmm yyyy')}</p>
           <div className="profile__followings">
-            <p className="profile__following">{following.length} Following</p>
-            <p className="profile__followers">{followers.length} Followers</p>
+            <p className="profile__following"><span>{following.length}</span> Following</p>
+            <p className="profile__followers"><span>{followers.length}</span> Followers</p>
           </div>
         </div>
-        <div className="profile__tweets"></div>
+        <div className="profile__tweets">
+          <div className="profile__options">
+            <h5 className="profile__option profile__option--active">Tweets</h5>
+            <h5 className="profile__option">Tweets & Replies</h5>
+            <h5 className="profile__option">Media</h5>
+            <h5 className="profile__option">Likes</h5>
+          </div>
+        </div>
       </div>
     </div>
   )

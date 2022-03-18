@@ -1,0 +1,106 @@
+.profile__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 10em;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profile__user {
+  position: relative;
+}
+
+.profile__avatar {
+  position: absolute;
+  top: -25px;
+  border: 2px solid var(--color-white);
+}
+
+.profile__infoTop > button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  margin: 1em;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  height: 35px;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.profile__infoTop > button:hover {
+  background-color: var(--color-blue-hover);
+}
+
+.profile__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .5em;
+}
+
+.profile__info > * {
+  margin: 0;
+}
+
+.profile__name {
+  font-size: 1.5em;
+}
+
+.profile__at {
+  font-size: 1em;
+  color: gray;
+  font-weight: normal;
+}
+
+.profile__description {
+  font-size: 1em;
+  padding: 1em 0;
+}
+
+.profile__created_at {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  color: gray;
+}
+
+.profile__created_at > .MuiSvgIcon-root {
+  font-size: 1em;
+  color: gray;
+}
+
+.profile__followings {
+  display: flex;
+  gap: 1em;
+}
+
+.profile__following,
+.profile__followers {
+  color: gray;
+}
+
+.profile__following > span,
+.profile__followers > span {
+  color: var(--color-black);
+  font-weight: bold;
+}
+.profile__options {
+  display: flex;
+  gap: 1em;
+  font-size: 1em;
+}
+
+.profile__option {
+  cursor: pointer;
+}
+
+.profile__option--active {
+  border-bottom: 3px solid var(--color-blue);
+}
