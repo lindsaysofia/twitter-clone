@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from './components/Home';
 import Login from './components/Login';
-import Profile from "./components/Profile";
+import ProfileMain from "./components/ProfileMain";
 
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/:uid" element={<Profile />} />
+      <Route path="/:uid" element={<ProfileMain />} />
     </Routes>
   );
 }

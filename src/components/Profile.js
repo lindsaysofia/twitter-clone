@@ -9,6 +9,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import dateFormat, { masks } from "dateformat";
 import { doc, getDoc, Timestamp } from "firebase/firestore";
 import db from '../firebase';
+import Feed from './Feed';
 
 function Profile() {
   let { uid } = useParams();
@@ -24,6 +25,8 @@ function Profile() {
     profile_banner_url: '',
     photoURL: ''
   });
+
+  const [category, setCategory] = useState('tweets');
 
   useEffect(() => {
     const docRef = doc(db, 'users', uid);
@@ -81,6 +84,14 @@ function Profile() {
     profile_banner_url,
     photoURL
   } = profile;
+
+  const handleCategorySwitch = (e) => {
+    const newCategory = e.target.id;
+    document.getElementById(category).classList.remove('profile__option--active');
+    document.getElementById(newCategory).classList.add('profile__option--active');
+    setCategory(newCategory);
+  };
+
   return (
     <div className="profile">
       <div className="profile__header" style={{backgroundImage: `url(${profile_banner_url})`}}>
@@ -108,11 +119,28 @@ function Profile() {
         </div>
         <div className="profile__tweets">
           <div className="profile__options">
-            <h5 className="profile__option profile__option--active">Tweets</h5>
-            <h5 className="profile__option">Tweets & Replies</h5>
-            <h5 className="profile__option">Media</h5>
-            <h5 className="profile__option">Likes</h5>
+            <h5 
+              id="tweets" 
+              className="profile__option profile__option--active"
+              onClick={handleCategorySwitch}
+            >Tweets</h5>
+            <h5 
+              id="tweetsandreplies" 
+              className="profile__option"
+              onClick={handleCategorySwitch}
+            >Tweets & Replies</h5>
+            <h5 
+              id="media"
+              className="profile__option"
+              onClick={handleCategorySwitch}
+            >Media</h5>
+            <h5 
+              id="likes"
+              className="profile__option"
+              onClick={handleCategorySwitch}
+            >Likes</h5>
           </div>
+          <Feed feed={feed} category={category} uid={uid} />
         </div>
       </div>
     </div>
