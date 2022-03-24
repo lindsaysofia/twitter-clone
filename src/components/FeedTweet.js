@@ -13,9 +13,12 @@ import dateFormat, { masks } from "dateformat";
 import { doc, getDoc } from "firebase/firestore";
 import db from '../firebase';
 import { auth } from '../firebase';
+import { useNavigate } from "react-router-dom";
 
 
 function FeedTweet(props) {
+  let navigate = useNavigate();
+
   const { created_at, in_like_to_tweetid, in_reply_to_tweetid, in_retweet_to_tweetid, like_count, reply_count, retweet_count, text, url, uid, photoURL } = props.tweet;
 
   const [user, setUser] = useState({name: '', at: ''});
@@ -72,7 +75,7 @@ function FeedTweet(props) {
         <div className="feedTweet_info">
           <div className="feedTweet__header">
             <div className="feedTweet__user">
-              <Link to="/">{name}</Link>
+              <Link className="feedTweet__name" to={`/${uid}`}>{name}</Link>
               <p>{at}</p>
               <FiberManualRecordIcon />
               <p>{dateFormat(new Date(created_at?.toDate()), 'd mmm yy')}</p>

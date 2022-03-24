@@ -11,20 +11,41 @@ import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import Avatar from '@mui/material/Avatar';
 import { useStateValue } from './StateProvider';
+import { actionTypes } from './reducer';
 import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from '../firebase';
+
 
 function HomeLeft() {
-  const [{ user }] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
   let navigate = useNavigate();
   
   const login = () => {
     navigate('/login');
   };
 
+  const logout = () => {
+    signOut(auth).then(() => {
+      console.log('loggedOut');
+    }).catch((err) => {
+      console.log(err);
+    });
+    dispatch({ 
+      type: actionTypes.SET_USER,
+      user: null,
+    });
+    navigate('/');
+  };
+
   return (
     <div className="homeLeft">
-      {user ? <Avatar className="homeLeft__logo" src={user.photoURL} /> : <TwitterIcon className="homeLeft__logo"/>}
-      <div className="homeLeft__option">
+      {user ? <Avatar className="homeLeft__logo" src={user.photoURL} onClick={() => {
+        navigate(`/${user.uid}`);
+      }} /> : <TwitterIcon className="homeLeft__logo"/>}
+      <div className="homeLeft__option" onClick={() => {
+        navigate('/');
+      }}>
         <HomeIcon />
         <h4>Home</h4>
       </div>
@@ -59,7 +80,10 @@ function HomeLeft() {
       {!user ? <button 
       className="homeLeft__button"
       onClick={login}
-      >Login</button> : ''}
+      >Login</button> : <button 
+      className="homeLeft__button"
+      onClick={logout}
+      >Logout</button>}
     </div>
   )
 }

@@ -48,6 +48,16 @@
   margin: 0;
 }
 
+.feedTweet__name {
+  color: var(--color-black);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.feedTweet__name:hover {
+  text-decoration: underline;
+}
+
 .feedTweet__user > p,
 .feedTweet__user > .MuiSvgIcon-root,
 .feedTweet__more > .MuiSvgIcon-root {

@@ -10,7 +10,7 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import IconButton from '@mui/material/IconButton';
 import { useStateValue } from './StateProvider';
 import db from '../firebase';
-import { collection, addDoc, Timestamp, doc,setDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp, doc, setDoc, arrayUnion, updateDoc, getDoc } from "firebase/firestore";
 
 function CreateTweet() {
   const [{ user }] = useStateValue();
@@ -33,6 +33,24 @@ function CreateTweet() {
       uid: user.uid,
       tweetid: newTweetRef.id,
       photoURL: user.photoURL,
+    })
+    .then(() => {
+      const userRef = doc(db, "users", user.uid);
+      updateDoc(userRef, {
+        feed: arrayUnion(newTweetRef.id)
+      });
+
+      getDoc(userRef)
+      .then((docSnap) => {
+        const { followers } = docSnap.data();
+        followers.forEach((follower) => {
+          const followerRef = doc(db, "users", follower);
+          updateDoc(followerRef, {
+            feed: arrayUnion(newTweetRef.id)
+          });
+        });
+      })
+      .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
     setText('');

@@ -10,9 +10,13 @@ import dateFormat, { masks } from "dateformat";
 import { doc, getDoc, Timestamp } from "firebase/firestore";
 import db from '../firebase';
 import Feed from './Feed';
+import { useStateValue } from './StateProvider';
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   let { uid } = useParams();
+  const [{ user }] = useStateValue();
+  let navigate = useNavigate();
 
   const [profile, setProfile] = useState({
     at: '',
@@ -95,18 +99,18 @@ function Profile() {
   return (
     <div className="profile">
       <div className="profile__header" style={{backgroundImage: `url(${profile_banner_url})`}}>
-        <IconButton title="Home">
+        <IconButton title="Home" onClick={() => {navigate('/')}}>
           <HomeIcon />
         </IconButton>
-        <IconButton title="Edit">
+        {(user && user.uid === uid) ? <IconButton title="Edit">
           <EditIcon />
-        </IconButton>
+        </IconButton> : ''}
       </div>
       <div className="profile__user">
         <div className="profile__info">
           <div className="profile__infoTop">
             <Avatar className="profile__avatar" src={photoURL} />
-            <button>Follow</button>
+            {((user && user.uid === uid) || !user) ? '' : <button>Follow</button>}
           </div>
           <h4 className="profile__name">{name}</h4>
           <h5 className="profile__at">@{at}</h5>
@@ -140,7 +144,7 @@ function Profile() {
               onClick={handleCategorySwitch}
             >Likes</h5>
           </div>
-          <Feed feed={feed} category={category} uid={uid} />
+          <Feed from="profile" feed={feed} category={category} uid={uid} />
         </div>
       </div>
     </div>

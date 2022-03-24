@@ -7,6 +7,9 @@ import { actionTypes } from './reducer';
 import { useStateValue } from './StateProvider';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { useNavigate } from "react-router-dom";
+import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore"; 
+import { Firestore } from '@firebase/firestore';
+import db from '../firebase';
 
 function Login() {
   const [state, dispatch] = useStateValue();
@@ -16,13 +19,41 @@ function Login() {
     //sign in
     signInWithPopup(auth, provider)
     .then((result) => {
-      dispatch({ 
-        type: actionTypes.SET_USER,
-        user: result.user,
-       });
-       navigate('/');
+      const userRef = doc(db, "users", result.user.uid);
+      getDoc(userRef)
+      .then((userSnap) => {
+        if (userSnap.exists()) {
+          dispatch({ 
+            type: actionTypes.SET_USER,
+            user: result.user,
+           });
+        } else {
+          const data = {
+            at: result.user.displayName,
+            created_at: Timestamp.now(),
+            description: '',
+            feed: [],
+            followers: [],
+            following: [],
+            name: result.user.displayName,
+            photoURL: result.user.photoURL,
+            profile_banner_url: '',
+            uid: result.user.uid
+          };
+          setDoc(doc(db, "users", result.user.uid), data);
+          dispatch({ 
+            type: actionTypes.SET_USER,
+            user: result.user,
+           });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      ;
+      navigate('/');
     })
-    .catch((err) => alert(err.message));
+    .catch((err) => console.log(err.message));
   };
   return (
     <div className="login">
